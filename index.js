@@ -97,6 +97,27 @@ module.exports = {
 
   },
 
+  merge: function() {
+
+    var dst = arguments[0],
+    otherObjs = Array.prototype.slice.call(arguments, 1);
+
+    otherObjs.forEach(function(obj) {
+
+      if (typeof obj === 'object' && object !== null) {
+
+        Object.keys(obj).forEach(function(key) {
+          dst[key] = obj[key];
+        });
+
+      }
+
+    });
+
+    return dst;
+
+  },
+
   usage: function(name, desc, schema) {
 
     var usageStr = '\n' + desc + '\n' +

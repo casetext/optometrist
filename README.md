@@ -97,6 +97,11 @@ Any of the parameters can also be set by environment variables:
 Error: Missing required option foo
 ```
 
+### optometrist.merge(dst, [src1], [src2], ...)
+
+Nonrecursively merge keys from src1, src2, etc., into dst.
+Provided as a convenience.
+
 ## Development
 
 ```bash
