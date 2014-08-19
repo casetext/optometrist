@@ -9,7 +9,7 @@ function dejsonize(str) {
   } catch(e) {
     try {
       rv = JSON.parse('"' + str.replace(/"/g, '\"') + '"');
-    } catch(e) {
+    } catch(e2) {
       rv = null;
     }
   }
