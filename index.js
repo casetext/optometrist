@@ -118,8 +118,6 @@ module.exports = {
         optionStr = optionStr + ' : ' + schema[option].description;
       }
 
-
-
       usageStr += '\t' + optionStr + '\n';
 
     });
