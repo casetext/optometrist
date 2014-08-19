@@ -1,7 +1,7 @@
 optometrist
 ===========
 
-Option setting via defaults, environment variables, and flags (in that order).
+Option setting via flags, environment variables, and defaults (in that order).
 
 ## Why yet another options parser?
 
@@ -67,7 +67,10 @@ var schema = {
 var settings;
 
 try {
+
   settings = optometrist.get(schema);
+  console.log('You provided', foo, 'for foo.');
+
 } catch(e) {
   
   console.log(optometrist.usage('myapp', 'Does cool stuff!', schema);
@@ -80,6 +83,18 @@ If the user fails to supply a value for ```foo```, they'll get the following:
 
 ```
 
+Does cool stuff!
+Usage: myapp options
+
+Options:
+
+  --foo
+
+Any of the parameters can also be set by environment variables:
+
+  FOO
+
+Error: Missing required option foo
 ```
 
 ## Development
@@ -93,4 +108,4 @@ npm test
 
 ## Copyright
 
-© 2014, J2H2, Inc. Licensed under MIT.
+© 2014, J2H2, Inc. Licensed under ISC.
