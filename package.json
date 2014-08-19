@@ -1,0 +1,15 @@
+{
+  "name": "optometrist",
+  "version": "0.1.0",
+  "description": "Simple argument parsing via process.argv and process.env.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -r test/setup test/spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "chai": "^1.9.1"
+  }
+}
