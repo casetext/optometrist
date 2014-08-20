@@ -104,7 +104,7 @@ module.exports = {
 
     otherObjs.forEach(function(obj) {
 
-      if (typeof obj === 'object' && object !== null) {
+      if (typeof obj === 'object' && obj !== null) {
 
         Object.keys(obj).forEach(function(key) {
           dst[key] = obj[key];

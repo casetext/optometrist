@@ -1,6 +1,6 @@
 {
   "name": "optometrist",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Simple argument parsing via process.argv and process.env.",
   "main": "index.js",
   "scripts": {

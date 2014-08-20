@@ -71,4 +71,24 @@ describe('Optometrist', function() {
 
   });
 
+  describe('#merge', function() {
+
+    it('merges multiple objects into the first object', function() {
+
+      var dstObj = { foo: 'bar', bar: 'baz' };
+      var srcObj = { foo: 'baz', quux: 3 };
+      var src2Obj = { quux: 4, bells: 'whistles' };
+
+      expect(optometrist.merge(dstObj, srcObj, src2Obj))
+      .to.deep.equal({
+        foo: 'baz',
+        bar: 'baz',
+        quux: 4,
+        bells: 'whistles'
+      });
+
+    });
+
+  });
+
 });
