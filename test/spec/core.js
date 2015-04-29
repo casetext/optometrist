@@ -27,15 +27,16 @@ var schema = {
 
 describe('Optometrist', function() {
 
-  describe('#get', function() {
+  describe('#getConfig', function() {
 
     before(function() {
-      optometrist.get.__argv = [ 'test', '--brain-salad-surgery=woffle', '--increment-radius=false' ];
-      optometrist.get.__env = { 'TEMPERATURE': 8, 'SCISSORS': 'eleventy' };
+      process.__testArgv = [ 'test', '--brain-salad-surgery=woffle', '--increment-radius=false' ];
+      process.__testEnv = { 'INCREMENT_RADIUS': true, 'TEMPERATURE': 8, 'SCISSORS': 'eleventy' };
     });
 
     it('retrieves the settings from the right places into an object', function() {
-      var settings = optometrist.get(schema);
+
+      var settings = optometrist.getConfig('test', schema);
 
       // test default settings
       expect(settings.pruneWithGloves).to.equal(true);
@@ -51,41 +52,32 @@ describe('Optometrist', function() {
 
       // test grabbing settings from argv
       expect(settings.brainSaladSurgery).to.equal('woffle');
+
+    });
+
+    it('throws if required configuration options are absent', function() {
+
+      expect(function() {
+        optometrist.getConfig('broken', { missing: { required: true }});
+      }).to.throw();
+
     });
 
   });
 
-  describe('#usage', function() {
+  describe('#getUsage', function() {
 
     it('returns a string containing usage instructions for the CLI', function() {
-      var usage = optometrist.usage('test', 'A test description.', schema);
+
+      var usage = optometrist.getUsage('test', 'test');
 
       expect(usage).to.be.a('string');
+      expect(usage).to.contain('MISSING');
       expect(usage).to.contain(schema.temperature.description);
       expect(usage).to.contain(schema.incrementRadius.description);
       expect(usage).to.contain(schema.scissors.description);
       expect(usage).to.contain(schema.brainSaladSurgery.description);
       expect(usage).to.contain(schema.pruneWithGloves.description);
-
-    });
-
-  });
-
-  describe('#merge', function() {
-
-    it('merges multiple objects into the first object', function() {
-
-      var dstObj = { foo: 'bar', bar: 'baz' };
-      var srcObj = { foo: undefined, quux: 3 };
-      var src2Obj = { quux: 4, bells: 'whistles' };
-
-      expect(optometrist.merge(dstObj, srcObj, src2Obj))
-      .to.deep.equal({
-        foo: undefined,
-        bar: 'baz',
-        quux: 4,
-        bells: 'whistles'
-      });
 
     });
 

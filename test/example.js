@@ -5,20 +5,20 @@ var optometrist = require('../index');
 var schema = {
   foo: {
     required: true,
-    description: 'Reverses the polarity of the neutron flow.'
+    description: 'Reverse the polarity of the neutron flow.'
   },
   bar: {
-    description: 'Invalidates the cache and checks for off-by-one errors.',
+    description: 'Invalidate the cache and check for off-by-one errors.',
     default: true
   }
 };
 var settings;
 
 try {
-  settings = optometrist.get(schema);
+  settings = optometrist.getConfig('default', schema);
   console.log('You set foo to', settings.foo, 'and bar to', settings.bar);
 } catch(e) {
-  console.error(optometrist.usage('App', 'A way cool app to do stuff!', schema));
+  console.error(optometrist.getUsage('sonic-screwdriver', 'Opens doors.'));
   console.error('Error:', e.message);
   process.exit(1);
 }
