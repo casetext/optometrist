@@ -61,6 +61,9 @@ describe('Optometrist', function() {
       var usage = optometrist.usage('test', 'A test description.', schema);
 
       expect(usage).to.be.a('string');
+      expect(usage).to.contain('--prune-with-gloves');
+      expect(usage).to.contain('--increment-radius');
+
       expect(usage).to.contain(schema.temperature.description);
       expect(usage).to.contain(schema.incrementRadius.description);
       expect(usage).to.contain(schema.scissors.description);

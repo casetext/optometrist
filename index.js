@@ -125,7 +125,7 @@ module.exports = {
 
     Object.keys(schema).forEach(function(option) {
 
-      var optionStr = '--' + option;
+      var optionStr = '--' + argize(option);
 
       if (schema[option].default) {
         optionStr += '=' + JSON.stringify(schema[option].default);
