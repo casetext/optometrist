@@ -16,13 +16,13 @@ npm install optometrist
 
 ## Methods
 
-### optometrist.get(schema)
+### optometrist.getConfig(name, schema)
 
-Given a schema object, returns an object containing settings.
+Given a name schema object, returns an object containing settings.
 They're retrieved in the following order of prioirty:
 
-1. Flags
-2. Environment variables
+1. Flags.
+2. Environment variables.
 3. Schema-provided defaults.
 
 The schema object follows this structure:
@@ -39,8 +39,11 @@ The schema object follows this structure:
 }
 ```
 
-If you include a 'required' key and it can't be found in any of the three locations,
-Optometrist will throw. This is convenient for use with ```optometrist.usage()```, as below.
+The schema will be retained under the provided ```name``` so that ```optometrist.getUsage()```
+is aware of it. This way, many different option sets can be supplied.
+
+If you include a 'required' key and its value can't be found in any of the three locations,
+getConfig will throw. This is convenient for use with ```optometrist.getUsage()```, as below.
 
 JSON.parse is used to coerce flags and environment variables back into Javascript objects.
 
@@ -50,10 +53,10 @@ looked up in the environment as ```HOW_MANY_ROMANS``` and in the flags as ```--h
 
 Flags should use the syntax ```--flag=value```.
 
-### optometrist.usage(name, description, schema)
+### optometrist.getUsage(name, description)
 
-Returns a string containing usage information for the schema. Useful for writing
-a command-line application.
+Returns a string containing usage information for the program given all the schemas
+that have been requested. Useful for writing a command-line application.
 
 Actually, all you have to do is:
 
@@ -68,12 +71,12 @@ var settings;
 
 try {
 
-  settings = optometrist.get(schema);
+  settings = optometrist.getConfig('default', schema);
   console.log('You provided', foo, 'for foo.');
 
 } catch(e) {
   
-  console.log(optometrist.usage('myapp', 'Does cool stuff!', schema);
+  console.log(optometrist.getUsage('myapp', 'Does cool stuff!');
   process.exit(1);
 
 }
@@ -97,11 +100,6 @@ Any of the parameters can also be set by environment variables:
 Error: Missing required option foo
 ```
 
-### optometrist.merge(dst, [src1], [src2], ...)
-
-Nonrecursively merge keys from src1, src2, etc., into dst.
-Provided as a convenience.
-
 ## Development
 
 ```bash
@@ -113,4 +111,4 @@ npm test
 
 ## Copyright
 
-© 2014, J2H2, Inc. Licensed under ISC.
+© 2014-5, Casetext, Inc. Licensed under ISC.
