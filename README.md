@@ -113,4 +113,4 @@ npm test
 
 ## Copyright
 
-© 2014, J2H2, Inc. Licensed under ISC.
+© 2015, Casetext, Inc. Licensed under ISC.
